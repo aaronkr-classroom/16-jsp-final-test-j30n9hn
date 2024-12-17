@@ -44,6 +44,7 @@
         </div>
       </div>
     </main>
+    <%@ include file="login.jsp" %>
 
     <!-- FOOTER -->
 

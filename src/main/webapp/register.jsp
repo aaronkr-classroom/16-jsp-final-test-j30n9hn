@@ -24,7 +24,38 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/public/css/confetti.css" />
 
     <!-- JS 파일에 대한 script테그를 수정하십시오 -->
-    <script defer src="${pageContext.request.contextPath}/public/js/functions.js"></script>
+    <script type="text/javascript">
+    	function checkMember() {
+    		var regExpName = /^[가-힣]*$/;
+    		var regExpPasswd = /^[0-9]*$/;
+    		var regExpPhone = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
+    		var regExpEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z]*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-z])*\.[a-zA-Z]{2,3}$)/i;
+    		var form = document.Member;
+    		var name = form.name.value;
+    		var passwd = form.password.value;
+    		var phone = form.phone.value
+    		var email = form.email.value;
+    		
+    		if (!regExpName.test(name)) {
+    			alert("이름은 한글만 입력");
+    			return;
+    		}
+    		if (!regExpPasswd.test(passwd)) {
+    			alert("비밀번호는 숫자만 입력");
+    			return;
+    		}
+    		if (!regExpPhone.test(phone)) {
+    			alert("연락처를 입력");
+    			return;
+    		}
+    		if (!regExpEmail.test(email)) {
+    			alert("이메일 입력을 확인해주세요");
+    			return;
+    		}
+    		
+    		form.submit();
+    	}
+    </script>
   </head>
 
   <body>
@@ -53,6 +84,8 @@
               class="p-4 p-md-5 border rounded-3 bg-light"
               action="./thanks.jsp"
               method="POST"
+              name = "Member"
+              onsubmit()="checkMember()"
             >
               <div class="form-floating mb-3">
                 <input
@@ -60,6 +93,7 @@
                   class="form-control"
                   id="floatingName"
                   placeholder="Name"
+                  name="name"
                 />
                 <label for="floatingName">Name</label>
               </div>
@@ -114,7 +148,7 @@
                 </div>
               </div>
 
-              <button class="w-100 btn btn-lg btn-primary ut-red" type="submit">
+              <button class="w-100 btn btn-lg btn-primary ut-red" type="submit" >
                 Submit
               </button>
               <hr />
